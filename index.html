@@ -1,0 +1,112 @@
+<title>a very small bird</title>
+<link rel="stylesheet" type="text/css" href="style/style.css" />
+<script>
+
+	var IE = document.all?true:false
+	
+	var posx = 0;
+	var posy = 0;
+	var Message = '';
+	var permanent_menu = 0;
+	
+	document.onmousemove = track;
+
+	function expand() {
+		if(document.getElementById('expand').style.display=='none') 
+			document.getElementById('expand').style.display='block';
+		else
+			document.getElementById('expand').style.display='none';
+	}
+	function comment(){
+
+		if (permanent_menu == current_tab)
+			return 0;
+		else
+			permanent_menu=0;
+
+		if (current_tab==1)
+			Message = 'Thoughts';
+		else if (current_tab==2)
+			Message = 'Library';
+		else if (current_tab==3)
+			Message = 'Projects';
+		else if (current_tab==4)
+			Message = 'Social Networking';
+		else if (current_tab==5)
+			Message = 'PGP Key';
+
+		document.getElementById('commentbox').innerHTML=Message;
+	  	document.getElementById('Quote').style.visibility='visible';
+	  	document.getElementById('commentbox').style.border="";
+		document.getElementById('Quote').style.marginLeft= posx - 96;
+		document.getElementById('Quote').style.marginTop= posy;		
+	}
+	function uncomment(){
+
+		if ( permanent_menu == current_tab)
+			return 0;
+
+	  	document.getElementById('Quote').style.visibility='hidden';
+		
+	}
+	function permanent(){
+
+				var Content = "";
+				permanent_menu = current_tab;
+				
+				if (current_tab==3)
+					Content = "<a href='http://kiwi.cs.und.edu/'>Kiwi Project</a>";
+				else if (current_tab==4)
+					Content = "<a href='http://twitter.com/cda'>Twitter</a>, <a href='http://facebook.com/collina'>Facebook</a>, <a href='http://flickr.com/collina'>Flickr</a>, <a href='http://scribd.com/collin'>Scribd</a>";
+				
+				document.getElementById('commentbox').innerHTML=Content;
+				document.getElementById('commentbox').style.borderBottom="2px dotted gray";
+				
+			  	document.getElementById('Quote').style.visibility='visible';
+				document.getElementById('Quote').style.marginLeft= posx - 96;
+				document.getElementById('Quote').style.marginTop= posy;
+	
+	}
+	function track(e) {
+
+		if (!e)				var e = window.event;
+		if (e.pageX) {
+			posx = e.pageX;
+			posy = e.pageY;
+		}
+		else if (e.clientX) {
+			posx = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+			posy = e.clientY - document.body.scrollTop - document.documentElement.scrollTop;
+
+		}
+	}
+</script>
+
+<div class="canvas">
+	<div id="name">Collin David Anderson</div>
+	<div id="bird"></div>
+	<div>
+		<span onmousemove="current_tab=1; comment();" onmouseout="uncomment();"><a href="http://b.averysmallbird.com/">blog.</a>
+		</span><span onmousemove="current_tab=2; comment();" onmouseout="uncomment();"><a href="http://l.averysmallbird.com/">works.</a>
+		</span><span onmousemove="current_tab=3; comment();" onmouseout="uncomment();" onclick="permanent();">projects.
+		</span><span onmousemove="current_tab=4; comment();" onmouseout="uncomment();" onclick="permanent();">social.
+		</span><span onmousemove="current_tab=5; comment();" onmouseout="uncomment();" onclick="permanent();"><a href="http://averysmallbird.com/public.asc">key.</a></span>
+	</div>
+</div>
+
+<div id="Quote" style="visibility:hidden">
+	<div id="commentfooter"><img src="/style/images/arrow.png" /></div>
+	<div id="commentbox"></div>
+</div>
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-12469736-1");
+pageTracker._setDomainName(".averysmallbird.com");
+pageTracker._trackPageview();
+} catch(err) {}</script>
